@@ -15,43 +15,62 @@ class TagParserTest extends TestCase
         //ARRANGE
         $this->parser = new TagParser();
     }
-
-    public function testItParsesASingleTag()
+    //form of use dataprovider in phpunit
+    /**
+     * @dataProvider  tagsProvider
+     */
+    public function testItParsesTags($input, $expected)
     {
-        //ACT
-        $result = $this->parser->parse('personal');
-        $expectedOutput = ['personal'];
-        //ASSERT
-        $this->assertSame($expectedOutput, $result);
+        $result = $this->parser->parse($input);
+        $this->assertSame($expected, $result);
+    }
+    public static function tagsProvider()
+    {
+        return [
+            ['personal', ['personal'] ],
+            ['personal, money, family', ['personal', 'money', 'family'] ],
+            ['personal,money,family', ['personal','money','family'] ],
+            ['personal|money|family|shop', ['personal', 'money', 'family', 'shop'] ]
 
+        ];
     }
 
-    public function testItParsesACommaSeparatedListOfTags()
-    {
-        //ACT
-        $result = $this->parser->parse('personal, money, family');
-        $expectedOutput = ['personal', 'money', 'family'];
-        //ASSERT
-        $this->assertSame($expectedOutput, $result);
+//    public function testItParsesASingleTag()
+//    {
+//        //ACT
+//        $result = $this->parser->parse('personal');
+//        $expectedOutput = ['personal'];
+//        //ASSERT
+//        $this->assertSame($expectedOutput, $result);
+//
+//    }
 
-    }
+//    public function testItParsesACommaSeparatedListOfTags()
+//    {
+//        //ACT
+//        $result = $this->parser->parse('personal, money, family');
+//        $expectedOutput = ['personal', 'money', 'family'];
+//        //ASSERT
+//        $this->assertSame($expectedOutput, $result);
+//
+//    }
 
-    public function testCommasAreOptional()
-    {
-        //ACT
-        $result = $this->parser->parse('personal,money,family');
-        $expectedOutput = ['personal', 'money', 'family'];
-        //ASSERT
-        $this->assertSame($expectedOutput, $result);
+//    public function testCommasAreOptional()
+//    {
+//        //ACT
+//        $result = $this->parser->parse('personal,money,family');
+//        $expectedOutput = ['personal', 'money', 'family'];
+//        //ASSERT
+//        $this->assertSame($expectedOutput, $result);
+//
+//    }
 
-    }
-
-    public function testItParsesAPipeSeparatedListOfTags()
-    {
-        //ACT
-        $result = $this->parser->parse('personal|money|family|shop');
-        $expectedOutput = ['personal', 'money', 'family', 'shop'];
-        //ASSERT
-        $this->assertSame($expectedOutput, $result);
-    }
+//    public function testItParsesAPipeSeparatedListOfTags()
+//    {
+//        //ACT
+//        $result = $this->parser->parse('personal|money|family|shop');
+//        $expectedOutput = ['personal', 'money', 'family', 'shop'];
+//        //ASSERT
+//        $this->assertSame($expectedOutput, $result);
+//    }
 }
