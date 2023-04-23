@@ -1,0 +1,26 @@
+{
+    "name": "smost/jargon",
+    "description": "The practice package of the jargon test videos",
+    "type": "project",
+    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": ">9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Smost\\Jargon\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mostafa Jamali",
+            "email": "rainbow1997@protonmail.com"
+        }
+    ],
+    "require": {}
+}
