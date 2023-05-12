@@ -19,14 +19,14 @@ class Question
     public function answer($answer)
     {
         $this->answer = $answer;
-        return $this->correct = $answer === $this->solution;
+        return $this->isSolved();
     }
     public function isAnswered(): bool
     {
         return isset($this->answer);
     }
-    public function solved()
+    public function isSolved()
     {
-        return $this->correct;
+        return $this->answer === $this->solution;
     }
 }

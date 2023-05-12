@@ -28,17 +28,18 @@ class QuizTest extends TestCase
     {
         $quiz = new Quiz();
         $quiz->addQuestion(new Question('What is 2+2?', 4));
-        $question = $quiz->getNextQuestion();
-        $question->answer(4);
+        $quiz->begin()->answer(4);
         $this->assertEquals(100, $quiz->grade());
     }
-
+    /**
+     * @test
+     */
     public function itGradesAFailedQuiz()
     {
         $quiz = new Quiz();
         $quiz->addQuestion(new Question('What is 2+2?', 4));
-        $question = $quiz->getNextQuestion();
-        $question->answer(4);
+        $quiz->begin()->answer('Incorrect Answer');
+
         $this->assertEquals(0, $quiz->grade());
     }
     /**

@@ -1,26 +1,26 @@
 <?php
 
 namespace Smost\Jargon;
-
+use Exception;
 class Quiz
 {
-    protected array $questions;
     public int $questionCount = 0;
 
+    public function __construct(public Questions $questions = new Questions())
+    {
+
+    }
     public function addQuestion(Question $question)
     {
-        $this->questions[] = $question;
+        $this->questions->add($question);
     }
 
     public function getNextQuestion()
     {
-        if(!isset($this->questions[$this->questionCount]))
-            return false;
-
-        return $this->questions[$this->questionCount++];
+     return $this->questions->next();
     }
 
-    public function getQuestions(): array
+    public function getQuestions(): Questions
     {
         return $this->questions;
     }
@@ -28,22 +28,19 @@ class Quiz
     public function grade()
     {
         if(!$this->isCompleted())
-            return throw new \Exception("This quiz has not been completed yet.");
-        $correct = count($this->correctlyAnsweredQuestions());
-        $total = count($this->questions);
+            return throw new Exception("This quiz has not been completed yet.");
 
-        return ($correct / $total) * 100;
+        $correct = count($this->questions->solved());
+        return ($correct / $this->questions->count()) * 100;
+    }
+    public function begin()
+    {
+        return $this->getNextQuestion();
     }
     public function isCompleted()
     {
-        //todo clean in another time
-        $answeredQuestionsCount = count(array_filter($this->questions, fn($question) => $question->isAnswered()));
-        $totalQuestionsCount = count($this->questions);
-        return $answeredQuestionsCount === $totalQuestionsCount; //True if they are equal
+        return count($this->questions->answered()) === $this->questions->count();
     }
-    public function correctlyAnsweredQuestions()
-    {
-        return array_filter($this->questions, fn($question) => $question->solved());
-    }
+
 
 }
