@@ -38,6 +38,7 @@ class SubscriptionTest extends TestCase
     public function itDeliversAReceipt()
     {
         //stub : we don't need expectations?
+        //test for github actions
         $gateway = $this->createMock(Gateway::class);
         //it just returns a value not expecting!
         $gateway->method('create')->willReturn('receipt-stub');//we use inline stubbing to create a output for a method create
