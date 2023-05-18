@@ -39,3 +39,8 @@ jobs:
           echo "Tests failed. Refusing the push."
           exit 1
         fi
+
+    - name: Push to GitHub repository
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
