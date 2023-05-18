@@ -7,6 +7,6 @@ class GatewayStub implements Gateway
 {
     public function create()
     {
-        return 'receipt-stub';safddas
+        return 'receipt-stub';
     }
 }
