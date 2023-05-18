@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +40,3 @@ jobs:
           echo "Tests failed. Refusing the push."
           exit 1
         fi
-
-    - name: Push to GitHub repository
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: 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
