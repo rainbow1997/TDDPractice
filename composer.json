@@ -22,5 +22,8 @@
             "email": "rainbow1997@protonmail.com"
         }
     ],
+    "scripts": {
+        "test": "phpunit tests --colors"
+    },
     "require": {}
 }
