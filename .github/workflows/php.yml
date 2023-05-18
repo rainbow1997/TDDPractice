@@ -31,3 +31,12 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+
+    - name: Check test status
+      run: |
+        if [ $? -eq 0 ]; then
+          echo "Tests passed. Proceeding with the push."
+        else
+          echo "Tests failed. Refusing the push."
+          exit 1
+        fi
